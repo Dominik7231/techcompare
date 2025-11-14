@@ -33,20 +33,9 @@ class _AIChatScreenState extends State<AIChatScreen> {
   void initState() {
     super.initState();
     _loadRemainingUses();
-    // Welcome message
-    String welcomeMessage;
-    if (widget.phones.isNotEmpty) {
-      welcomeMessage = 'Hi! I\'m your phone expert assistant. Ask me anything about these ${widget.phones.length} phones, and I\'ll help you find the perfect match! 📱';
-    } else if (widget.macs.isNotEmpty) {
-      welcomeMessage = 'Hi! I\'m your Mac expert assistant. Ask me anything about these ${widget.macs.length} Macs, and I\'ll help you find the perfect match! 💻';
-    } else if (widget.ipads.isNotEmpty) {
-      welcomeMessage = 'Hi! I\'m your iPad expert assistant. Ask me anything about these ${widget.ipads.length} iPads, and I\'ll help you find the perfect match! 📱';
-    } else {
-      welcomeMessage = 'Hi! I\'m your tech expert assistant. How can I help you today?';
-    }
     _messages.add({
       'role': 'assistant',
-      'content': welcomeMessage,
+      'content': 'Coming soon!',
     });
   }
 
@@ -154,7 +143,7 @@ class _AIChatScreenState extends State<AIChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('💬 Chat with AI'),
+        title: const Text('💬 Chat with AI (Coming soon!)'),
         backgroundColor: Colors.deepPurple,
         actions: [
           Container(
@@ -311,16 +300,9 @@ class _AIChatScreenState extends State<AIChatScreen> {
                         controller: _messageController,
                         style: const TextStyle(color: Colors.white),
                         maxLines: null,
-                        textInputAction: TextInputAction.send,
-                        onSubmitted: (_) => _sendMessage(),
+                        enabled: false,
                         decoration: InputDecoration(
-                          hintText: widget.phones.isNotEmpty
-                              ? 'Ask about phones...'
-                              : widget.macs.isNotEmpty
-                              ? 'Ask about Macs...'
-                              : widget.ipads.isNotEmpty
-                              ? 'Ask about iPads...'
-                              : 'Type a message...',
+                          hintText: 'Coming soon!',
                           hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
                           filled: true,
                           fillColor: Colors.white.withOpacity(0.1),
@@ -337,7 +319,7 @@ class _AIChatScreenState extends State<AIChatScreen> {
                     ),
                     const SizedBox(width: 8),
                     FloatingActionButton(
-                      onPressed: _isLoading ? null : _sendMessage,
+                      onPressed: null,
                       backgroundColor: Colors.deepPurple,
                       child: const Icon(Icons.send),
                     ),
