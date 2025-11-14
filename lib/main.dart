@@ -80,17 +80,17 @@ class _MyAppState extends State<MyApp> {
     );
 
     final darkScheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF6366F1),
+      seedColor: const Color(0xFF7C3AED),
       brightness: Brightness.dark,
     ).copyWith(
-      surface: const Color(0xFF1E1E2E),
-      surfaceContainerHighest: const Color(0xFF252538),
-      onSurface: Colors.white,
-      primary: const Color(0xFF818CF8),
-      secondary: const Color(0xFFA78BFA),
+      surface: const Color(0xFF12121B),
+      surfaceContainerHighest: const Color(0xFF1B1B2C),
+      onSurface: const Color(0xFFE5E7EB),
+      primary: const Color(0xFF8B5CF6),
+      secondary: const Color(0xFF22D3EE),
       tertiary: const Color(0xFF34D399),
-      error: const Color(0xFFF87171),
-      background: const Color(0xFF0F0F23),
+      error: const Color(0xFFEF4444),
+      background: const Color(0xFF0B0B14),
     );
 
     return MaterialApp(
@@ -268,11 +268,11 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         useMaterial3: true,
         colorScheme: darkScheme,
-        scaffoldBackgroundColor: const Color(0xFF1A1A2E),
+        scaffoldBackgroundColor: darkScheme.surface,
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0,
-          backgroundColor: Color(0xFF2D3142),
+          backgroundColor: darkScheme.surfaceContainerHighest,
           foregroundColor: Colors.white,
         ),
         textTheme: TextTheme(
@@ -337,7 +337,7 @@ class _MyAppState extends State<MyApp> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: const Color(0xFF2D3142),
+          color: darkScheme.surface,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

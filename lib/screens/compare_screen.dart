@@ -432,7 +432,7 @@ class _CompareScreenState extends State<CompareScreen> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : Colors.black,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -577,7 +577,9 @@ class _CompareScreenState extends State<CompareScreen> {
 
   String _buildTweetText() {
     final names = widget.phones.map((p) => p.name).join(' vs ');
-    final maxStorage = widget.phones.reduce((a, b) => a.storage > b.storage ? a : b);
+    final maxStorage = widget.phones.reduce((a, b) =>
+        (a.storageOptions.isNotEmpty ? a.storageOptions.last : 0) >
+        (b.storageOptions.isNotEmpty ? b.storageOptions.last : 0) ? a : b);
     final maxBattery = widget.phones.reduce((a, b) => a.battery > b.battery ? a : b);
     final minPrice = widget.phones.reduce((a, b) => a.price < b.price ? a : b);
     final text = 'Phone Comparison: $names\n'
@@ -629,11 +631,11 @@ class _CompareScreenState extends State<CompareScreen> {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? Colors.grey.shade900 : Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: isDark ? Colors.black38 : Colors.grey.shade300,
+            color: isDark ? Colors.black26 : Colors.grey.shade300,
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -650,7 +652,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: isDark ? Colors.white : Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ],
@@ -742,6 +744,7 @@ class _CompareScreenState extends State<CompareScreen> {
   ) {
     final maxValue = values.reduce((a, b) => a > b ? a : b);
     final minValue = values.reduce((a, b) => a < b ? a : b);
+    final allEqual = values.every((v) => v == maxValue);
 
     return Container(
       margin: const EdgeInsets.all(8),
@@ -790,8 +793,8 @@ class _CompareScreenState extends State<CompareScreen> {
             child: Row(
               children: List.generate(values.length, (index) {
                 final value = values[index];
-                final isBest = value == maxValue && maxValue != minValue;
-                final isWorst = value == minValue && maxValue != minValue;
+                final isBest = value == maxValue;
+                final isWorst = !allEqual && value == minValue && value != maxValue;
 
                 return Expanded(
                   child: Container(
@@ -799,10 +802,10 @@ class _CompareScreenState extends State<CompareScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     decoration: BoxDecoration(
                       color: isBest
-                          ? Theme.of(context).colorScheme.tertiaryContainer
+                          ? Theme.of(context).colorScheme.tertiary.withOpacity(0.18)
                           : isWorst
-                              ? Theme.of(context).colorScheme.errorContainer
-                              : null,
+                              ? Theme.of(context).colorScheme.error.withOpacity(0.18)
+                              : Theme.of(context).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
@@ -820,7 +823,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                     : Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
-                        if (isBest)
+                        if (isBest && !allEqual)
                           Icon(
                             Icons.emoji_events,
                             color: Theme.of(context).colorScheme.tertiary,
@@ -842,11 +845,11 @@ class _CompareScreenState extends State<CompareScreen> {
     return Container(
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: isDark ? Colors.grey.shade900 : Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: isDark ? Colors.black38 : Colors.grey.shade300,
+            color: isDark ? Colors.black26 : Colors.grey.shade300,
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -857,7 +860,7 @@ class _CompareScreenState extends State<CompareScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: isDark ? Colors.purple.shade800 : Colors.purple.shade100,
+              color: Theme.of(context).colorScheme.primaryContainer,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
@@ -867,9 +870,7 @@ class _CompareScreenState extends State<CompareScreen> {
               children: [
                 Icon(
                   Icons.palette,
-                  color: isDark
-                      ? Colors.purple.shade200
-                      : Colors.purple.shade700,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(width: 8),
                 Text(
@@ -877,9 +878,7 @@ class _CompareScreenState extends State<CompareScreen> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: isDark
-                        ? Colors.purple.shade200
-                        : Colors.purple.shade700,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -901,9 +900,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 11,
-                            color: isDark
-                                ? Colors.grey.shade300
-                                : Colors.black87,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       );
@@ -919,13 +916,17 @@ class _CompareScreenState extends State<CompareScreen> {
   }
 
   Widget _buildWinnerSummary(bool isDark) {
-    final maxStorage = widget.phones.reduce(
-      (a, b) => a.storage > b.storage ? a : b,
-    );
-    final maxBattery = widget.phones.reduce(
-      (a, b) => a.battery > b.battery ? a : b,
-    );
-    final minPrice = widget.phones.reduce((a, b) => a.price < b.price ? a : b);
+    final storageValues = widget.phones
+        .map((p) => p.storageOptions.isNotEmpty ? p.storageOptions.last : 0)
+        .toList();
+    final maxStorageVal = storageValues.reduce((a, b) => a > b ? a : b);
+    final storageWinners = widget.phones
+        .where((p) => (p.storageOptions.isNotEmpty ? p.storageOptions.last : 0) == maxStorageVal)
+        .toList();
+    final maxBatteryVal = widget.phones.map((p) => p.battery).reduce((a, b) => a > b ? a : b);
+    final batteryWinners = widget.phones.where((p) => p.battery == maxBatteryVal).toList();
+    final minPriceVal = widget.phones.map((p) => p.price).reduce((a, b) => a < b ? a : b);
+    final priceWinners = widget.phones.where((p) => p.price == minPriceVal).toList();
     final maxBrightness =
         widget.phones
             .where((p) => p.peakBrightness != null && p.peakBrightness! > 0)
@@ -974,7 +975,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: isDark ? Colors.white : Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ],
@@ -982,14 +983,14 @@ class _CompareScreenState extends State<CompareScreen> {
           const SizedBox(height: 12),
           _buildWinnerItem(
             '💾 Most Storage',
-            maxStorage.name,
-            '${maxStorage.storageOptions.last} GB',
+            storageWinners.map((p) => p.name).join(' • '),
+            '$maxStorageVal GB',
             isDark,
           ),
           _buildWinnerItem(
             '🔋 Biggest Battery',
-            maxBattery.name,
-            '${maxBattery.battery} mAh',
+            batteryWinners.map((p) => p.name).join(' • '),
+            '$maxBatteryVal mAh',
             isDark,
           ),
           if (maxBrightness != null)
@@ -1008,8 +1009,8 @@ class _CompareScreenState extends State<CompareScreen> {
             ),
           _buildWinnerItem(
             '💰 Best Price',
-            minPrice.name,
-            '\$${minPrice.price}',
+            priceWinners.map((p) => p.name).join(' • '),
+            AppSettings.formatPrice(minPriceVal),
             isDark,
           ),
         ],
@@ -1034,7 +1035,7 @@ class _CompareScreenState extends State<CompareScreen> {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -1048,16 +1049,14 @@ class _CompareScreenState extends State<CompareScreen> {
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : Colors.black,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 Text(
                   value,
                   style: TextStyle(
                     fontSize: 11,
-                    color: isDark
-                        ? Colors.green.shade300
-                        : Colors.green.shade700,
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
               ],
@@ -1093,9 +1092,9 @@ class _CompareScreenState extends State<CompareScreen> {
       buffer.writeln('');
     }
 
-    final maxStorage = widget.phones.reduce(
-      (a, b) => a.storage > b.storage ? a : b,
-    );
+    final maxStorage = widget.phones.reduce((a, b) =>
+        (a.storageOptions.isNotEmpty ? a.storageOptions.last : 0) >
+        (b.storageOptions.isNotEmpty ? b.storageOptions.last : 0) ? a : b);
     final maxBattery = widget.phones.reduce(
       (a, b) => a.battery > b.battery ? a : b,
     );

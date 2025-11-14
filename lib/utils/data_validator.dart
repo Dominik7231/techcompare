@@ -32,6 +32,19 @@ class DataValidator {
       if (p.brand.isEmpty) warnings.add('Phone \'${p.name}\' brand missing');
       if (p.price <= 0) warnings.add('Phone \'${p.name}\' price invalid');
       if (p.storageOptions.isEmpty) warnings.add('Phone \'${p.name}\' storageOptions empty');
+      if (p.storageOptions.isNotEmpty) {
+        final sorted = List<int>.from(p.storageOptions)..sort();
+        if (!listEquals(sorted, p.storageOptions)) {
+          warnings.add('Phone \'${p.name}\' storageOptions not sorted ascending');
+        }
+        if (p.storageOptions.any((s) => s <= 0)) {
+          warnings.add('Phone \'${p.name}\' storageOptions contain non-positive value');
+        }
+      }
+      if (p.ram != null && (p.ram ?? 0) <= 0) warnings.add('Phone \'${p.name}\' RAM invalid');
+      if (p.weight != null && (p.weight ?? 0) <= 0) warnings.add('Phone \'${p.name}\' weight invalid');
+      if (p.refreshRate != null && (p.refreshRate ?? 0) <= 0) warnings.add('Phone \'${p.name}\' refreshRate invalid');
+      if (p.peakBrightness != null && (p.peakBrightness ?? 0) <= 0) warnings.add('Phone \'${p.name}\' peakBrightness invalid');
     }
 
     void validateMac(Mac m) {
