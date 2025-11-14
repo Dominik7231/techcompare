@@ -1,0 +1,11 @@
+Modell,Megjelenés éve,"Kijelző (méret, felbontás, típus)",Processzor,RAM,Tárolókapacitás,Hátsó kamera,Elülső kamera,Akkumulátor (mAh / videólejátszás órák),Méretek (mm),Súly (g),IP védelem,Csatlakozás,Fontos jellemzők
+iPhone 17,2025,"6.3"", 2622×1206, OLED",A19,8 GB,256/512 GB,48+48 MP,12 MP,~3561 mAh / 30,149.6 × 71.5 × 7.95,177,IP68 (6 m/30 perc),USB-C,"1–120 Hz, Face ID, Apple Intelligence"
+iPhone 16,2024,"6.1"", 2556×1179, OLED",A18,8 GB,128/256/512 GB,48+12 MP,12 MP,3561 mAh / 22,147.6 × 71.6 × 7.80,170,IP68 (6 m/30 perc),USB-C,Face ID
+iPhone 15,2023,"6.1"", 2556×1179, OLED",A16 Bionic,6 GB,128/256/512 GB,48+12 MP,12 MP,3349 mAh / 20,147.6 × 71.6 × 7.80,171,IP68 (6 m/30 perc),USB-C,Face ID
+iPhone 14,2022,"6.1"", 2532×1170, OLED",A15 Bionic (5-core GPU),6 GB,128/256/512 GB,12+12 MP,12 MP,3279 mAh / 20,146.7 × 71.5 × 7.80,172,IP68 (6 m/30 perc),Lightning,Face ID
+iPhone 13,2021,"6.1"", 2532×1170, OLED",A15 Bionic,4 GB,128/256/512 GB,12+12 MP,12 MP,3227 mAh / 19,146.7 × 71.5 × 7.65,174,IP68 (6 m/30 perc),Lightning,Face ID
+iPhone 12,2020,"6.1"", 2532×1170, OLED",A14 Bionic,4 GB,64/128/256 GB,12+12 MP,12 MP,2815 mAh / 17,146.7 × 71.5 × 7.4,164,IP68 (6 m/30 perc),Lightning,Face ID
+iPhone 11,2019,"6.1"", 1792×828, LCD",A13 Bionic,4 GB,64/128/256 GB,12+12 MP,12 MP,3110 mAh / 17,150.9 × 75.7 × 8.3,194,IP68 (2 m/30 perc),Lightning,Face ID
+iPhone XS,2018,"5.8"", 2436×1125, OLED",A12 Bionic,4 GB,64/256/512 GB,12+12 MP,7 MP,2658 mAh / 14,143.6 × 70.9 × 7.7,177,IP68 (2 m/30 perc),Lightning,Face ID
+iPhone X,2017,"5.8"", 2436×1125, OLED",A11 Bionic,3 GB,64/256 GB,12+12 MP,7 MP,2716 mAh / 13,143.6 × 70.9 × 7.7,174,IP67 (1 m/30 perc),Lightning,Face ID
+iPhone 8,2017,"4.7"", 1334×750, LCD",A11 Bionic,2 GB,64/128/256 GB,12 MP,7 MP,1821 mAh / 13,138.4 × 67.3 × 7.3,148,IP67 (1 m/30 perc),Lightning,Touch ID
