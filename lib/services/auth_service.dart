@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class AuthService {
   late final GoogleSignIn _googleSignIn = kIsWeb
       ? GoogleSignIn(
-          clientId: const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID', defaultValue: ''),
+          clientId: '425679233015-dlikrug7efuc002befhqcvr36h8423of.apps.googleusercontent.com',
         )
       : GoogleSignIn();
 
