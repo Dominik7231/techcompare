@@ -223,17 +223,18 @@ class _CompareSelectScreenState extends State<CompareSelectScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Compare Devices',
-                            style: const TextStyle(
+                            'Compare $selectedCategory',
+                            style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                              color: isDark ? Colors.white : Colors.black87,
                             ),
                           ),
                           Text(
                             'Select 2-4 devices',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.grey[600],
+                              color: isDark ? Colors.white60 : Colors.grey[600],
                             ),
                           ),
                         ],
@@ -266,24 +267,27 @@ class _CompareSelectScreenState extends State<CompareSelectScreen> {
                   // Category Chips
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),
-                    child: Row(
-                      children: [
-                        _buildCategoryChip('Phones', Icons.phone_iphone, isDark),
-                        const SizedBox(width: 12),
-                        _buildCategoryChip('Macs', Icons.laptop_mac, isDark),
-                        const SizedBox(width: 12),
-                        _buildCategoryChip('iPads', Icons.tablet_mac, isDark),
-                        const SizedBox(width: 12),
-                        _buildCategoryChip('AirPods', Icons.headphones, isDark),
-                        const SizedBox(width: 12),
-                        _buildCategoryChip('Watches', Icons.watch, isDark),
-                        const SizedBox(width: 12),
-                        _buildCategoryChip('Laptops', Icons.laptop, isDark),
-                        const SizedBox(width: 12),
-                        _buildCategoryChip('Tablets', Icons.tablet, isDark),
-                        const SizedBox(width: 12),
-                        _buildCategoryChip('Headphones', Icons.headphones, isDark),
-                      ],
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          _buildCategoryChip('Phones', '📱', isDark),
+                          const SizedBox(width: 12),
+                          _buildCategoryChip('Macs', '💻', isDark),
+                          const SizedBox(width: 12),
+                          _buildCategoryChip('iPads', '📱', isDark),
+                          const SizedBox(width: 12),
+                          _buildCategoryChip('AirPods', '🎧', isDark),
+                          const SizedBox(width: 12),
+                          _buildCategoryChip('Watches', '⌚', isDark),
+                          const SizedBox(width: 12),
+                          _buildCategoryChip('Laptops', '💻', isDark),
+                          const SizedBox(width: 12),
+                          _buildCategoryChip('Tablets', '📱', isDark),
+                          const SizedBox(width: 12),
+                          _buildCategoryChip('Headphones', '🎧', isDark),
+                        ],
+                      ),
                     ),
                   ),
                   
@@ -509,74 +513,71 @@ class _CompareSelectScreenState extends State<CompareSelectScreen> {
     );
   }
 
-  Widget _buildCategoryChip(String category, IconData icon, bool isDark) {
+  Widget _buildCategoryChip(String category, String emoji, bool isDark) {
     final isSelected = selectedCategory == category;
     
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedCategory = category;
-            searchQuery = ''; // Clear search when switching
-            selectedBrand = 'All';
-            selectedPhones.clear();
-            selectedMacs.clear();
-            selectediPads.clear();
-            selectedAirPods.clear();
-            selectedWatches.clear();
-            selectedLaptops.clear();
-            selectedTablets.clear();
-            selectedHeadphones.clear();
-          });
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          decoration: BoxDecoration(
-            gradient: isSelected 
-                ? const LinearGradient(
-                    colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
-                  )
-                : null,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedCategory = category;
+          searchQuery = ''; // Clear search when switching
+          selectedBrand = 'All';
+          selectedPhones.clear();
+          selectedMacs.clear();
+          selectediPads.clear();
+          selectedAirPods.clear();
+          selectedWatches.clear();
+          selectedLaptops.clear();
+          selectedTablets.clear();
+          selectedHeadphones.clear();
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        decoration: BoxDecoration(
+          gradient: isSelected 
+              ? const LinearGradient(
+                  colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
+                )
+              : null,
+          color: isSelected 
+              ? null 
+              : (isDark ? const Color(0xFF2D2D44) : Colors.white),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
             color: isSelected 
-                ? null 
-                : (isDark ? const Color(0xFF2D2D44) : Colors.white),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: isSelected 
-                  ? Colors.transparent 
-                  : Colors.grey.withOpacity(0.3),
-              width: 1.5,
+                ? Colors.transparent 
+                : Colors.grey.withOpacity(0.3),
+            width: 1.5,
+          ),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: const Color(0xFF6366F1).withOpacity(0.3),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
-            boxShadow: isSelected ? [
-              BoxShadow(
-                color: const Color(0xFF6366F1).withOpacity(0.3),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+          ] : [],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              emoji,
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              category,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: isSelected 
+                    ? Colors.white 
+                    : (isDark ? Colors.white : Colors.black87),
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                fontSize: 15,
               ),
-            ] : [],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 18,
-                color: isSelected ? Colors.white : (isDark ? Colors.white : Colors.black87),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                category,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: isSelected 
-                      ? Colors.white 
-                      : (isDark ? Colors.white : Colors.black87),
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
-                  fontSize: 15,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
