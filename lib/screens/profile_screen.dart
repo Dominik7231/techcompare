@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../utils/settings.dart';
 import '../services/auth_service.dart';
 import '../data/phones_data.dart';
@@ -605,6 +606,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // Social Links
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF2D3142) : Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(isDark ? 0.1 : 0.05),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.public,
+                    color: isDark ? Colors.white70 : Colors.black54,
+                  ),
+                  title: Text(
+                    'Follow on X (Twitter)',
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '@Dominik7231',
+                    style: TextStyle(
+                      color: isDark ? Colors.white60 : Colors.black54,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.open_in_new,
+                    color: isDark ? Colors.white70 : Colors.black54,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse('https://x.com/Dominik7231');
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url, mode: LaunchMode.externalApplication);
+                    }
+                  },
                 ),
               ),
 
