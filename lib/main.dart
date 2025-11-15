@@ -15,14 +15,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   try {
-    if (!kIsWeb) {
-      // Initialize Firebase only for native platforms (Android/iOS)
+    if (kIsWeb) {
+      // Initialize Firebase for web
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
+      _firebaseInitialized = true;
+      debugPrint('Firebase initialized for web');
+    } else {
+      // Initialize Firebase for native platforms (Android/iOS)
       await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
       _firebaseInitialized = true;
-    } else {
-      // Skip Firebase on web for now
-      debugPrint('Skipping Firebase initialization on web');
-      _firebaseInitialized = false;
+      debugPrint('Firebase initialized for native');
     }
   } catch (e) {
     debugPrint('Firebase initialization error: $e');

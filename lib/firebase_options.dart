@@ -7,7 +7,7 @@ class DefaultFirebaseOptions {
         projectId: 'techcompare-ac51b',
         storageBucket: 'techcompare-ac51b.firebasestorage.app',
         messagingSenderId: '425679233015',
-        appId: '1:425679233015:web:PLACEHOLDER',
+        appId: '1:425679233015:web:df0569f1597f824b2958f2',
       );
   
   static FirebaseOptions get android => const FirebaseOptions(
