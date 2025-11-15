@@ -16,7 +16,11 @@ void main() async {
   
   try {
     if (kIsWeb) {
-      await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
+      final opts = DefaultFirebaseOptions.web;
+      if (opts.apiKey.isEmpty || opts.appId.isEmpty || opts.projectId.isEmpty) {
+        throw 'Missing Firebase web options';
+      }
+      await Firebase.initializeApp(options: opts);
     } else {
       await Firebase.initializeApp();
     }

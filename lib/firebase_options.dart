@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 
 class DefaultFirebaseOptions {
-  static FirebaseOptions get web => const FirebaseOptions(
-        apiKey: 'REPLACE_WITH_API_KEY',
-        authDomain: 'REPLACE_WITH_AUTH_DOMAIN',
-        projectId: 'REPLACE_WITH_PROJECT_ID',
-        storageBucket: 'REPLACE_WITH_STORAGE_BUCKET',
-        messagingSenderId: 'REPLACE_WITH_SENDER_ID',
-        appId: 'REPLACE_WITH_APP_ID',
+  static FirebaseOptions get web => FirebaseOptions(
+        apiKey: const String.fromEnvironment('FIREBASE_API_KEY', defaultValue: ''),
+        authDomain: const String.fromEnvironment('FIREBASE_AUTH_DOMAIN', defaultValue: ''),
+        projectId: const String.fromEnvironment('FIREBASE_PROJECT_ID', defaultValue: ''),
+        storageBucket: const String.fromEnvironment('FIREBASE_STORAGE_BUCKET', defaultValue: ''),
+        messagingSenderId: const String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID', defaultValue: ''),
+        appId: const String.fromEnvironment('FIREBASE_APP_ID', defaultValue: ''),
       );
 }
