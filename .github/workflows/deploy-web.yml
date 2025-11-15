@@ -41,7 +41,7 @@ jobs:
           flutter build web \
             --release \
             --no-wasm-dry-run \
-            --base-href "/" \
+            --base-href "/${{ steps.repo.outputs.name }}/" \
             --dart-define=FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} \
             --dart-define=FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }} \
             --dart-define=FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }} \
