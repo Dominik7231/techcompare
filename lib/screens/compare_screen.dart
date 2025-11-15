@@ -429,19 +429,25 @@ class _CompareScreenState extends State<CompareScreen> {
                 Text(
                   phone.name,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(offset: Offset(0, 1), blurRadius: 2, color: Colors.black26),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   AppSettings.formatPrice(phone.price),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(offset: Offset(0, 1), blurRadius: 2, color: Colors.black26),
+                    ],
                   ),
                 ),
               ],
