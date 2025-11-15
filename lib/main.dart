@@ -269,7 +269,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         colorScheme: darkScheme,
         scaffoldBackgroundColor: darkScheme.surface,
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           centerTitle: true,
           elevation: 0,
           backgroundColor: darkScheme.surfaceContainerHighest,
