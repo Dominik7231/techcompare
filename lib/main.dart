@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'dart:ui' as ui;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'screens/home_screen.dart';
 import 'utils/data_validator.dart';
 import 'services/ad_service.dart';
+import 'firebase_options.dart';
 
 bool _firebaseInitialized = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase
   try {
-    await Firebase.initializeApp();
+    if (kIsWeb) {
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
+    } else {
+      await Firebase.initializeApp();
+    }
     _firebaseInitialized = true;
   } catch (e) {
     debugPrint('Firebase initialization error: $e');

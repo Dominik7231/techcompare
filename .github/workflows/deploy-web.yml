@@ -37,7 +37,7 @@ jobs:
         run: echo "name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
 
       - name: Build web
-        run: flutter build web --release --web-renderer html --no-wasm-dry-run --base-href "/${{ steps.repo.outputs.name }}/"
+        run: flutter build web --release --no-wasm-dry-run --base-href "/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

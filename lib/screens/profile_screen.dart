@@ -61,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     },
   ];
   final TextEditingController _nameController = TextEditingController();
-  String _appVersion = '1.0.71'; // Set default version
+  String _appVersion = '1.0.106';
   final _authService = AuthService();
   bool _hasFirebaseUser = false;
   final TextEditingController _promoController = TextEditingController();
