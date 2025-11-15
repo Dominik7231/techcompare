@@ -1,12 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 
 class DefaultFirebaseOptions {
-  static FirebaseOptions get web => FirebaseOptions(
-        apiKey: const String.fromEnvironment('FIREBASE_API_KEY', defaultValue: ''),
-        authDomain: const String.fromEnvironment('FIREBASE_AUTH_DOMAIN', defaultValue: ''),
-        projectId: const String.fromEnvironment('FIREBASE_PROJECT_ID', defaultValue: ''),
-        storageBucket: const String.fromEnvironment('FIREBASE_STORAGE_BUCKET', defaultValue: ''),
-        messagingSenderId: const String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID', defaultValue: ''),
-        appId: const String.fromEnvironment('FIREBASE_APP_ID', defaultValue: ''),
+  static FirebaseOptions get web => const FirebaseOptions(
+        apiKey: 'AIzaSyBOClan2ER3QJdzjaXLhcKtV2sZm9o2fEE',
+        authDomain: 'techcompare-ac51b.firebaseapp.com',
+        projectId: 'techcompare-ac51b',
+        storageBucket: 'techcompare-ac51b.firebasestorage.app',
+        messagingSenderId: '425679233015',
+        appId: '1:425679233015:web:PLACEHOLDER',
+      );
+  
+  static FirebaseOptions get android => const FirebaseOptions(
+        apiKey: 'AIzaSyBOClan2ER3QJdzjaXLhcKtV2sZm9o2fEE',
+        authDomain: 'techcompare-ac51b.firebaseapp.com',
+        projectId: 'techcompare-ac51b',
+        storageBucket: 'techcompare-ac51b.firebasestorage.app',
+        messagingSenderId: '425679233015',
+        appId: '1:425679233015:android:2f7bbf433ca3c82d2958f2',
       );
 }
